@@ -1,8 +1,8 @@
 variables {
   prefix     = "tftest"
   region     = "us-east-2"
-  env        = "demo"
-  department = "demo"
+  env        = "test"
+  department = "PlatformEng"
 }
 
 provider "aws" {
@@ -13,7 +13,7 @@ run "unit_test" {
   command = plan
 
   assert {
-    condition     = aws_s3_bucket.www_bucket.bucket_prefix == "tftest-hashicafe-website-demo-"
+    condition     = aws_s3_bucket.www_bucket.bucket_prefix == "tftest-hashicafe-website-test-"
     error_message = "S3 bucket prefix does not match expected value."
   }
   assert {
@@ -56,7 +56,7 @@ run "create_bucket" {
   command = apply
 
   assert {
-    condition     = startswith(aws_s3_bucket.www_bucket.bucket, "tftest-hashicafe-website-demo-")
+    condition     = startswith(aws_s3_bucket.www_bucket.bucket, "tftest-hashicafe-website-test-")
     error_message = "The bucket name does not start with the expected prefix."
   }
 }
