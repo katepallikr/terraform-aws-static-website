@@ -78,6 +78,13 @@ data "aws_iam_policy_document" "s3_public_access_policy" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "www_bucket" {
+  bucket = aws_s3_bucket.www_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "random_integer" "product" {
   min = 0
   max = length(local.hashi_products) - 1
