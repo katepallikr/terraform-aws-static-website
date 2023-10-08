@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.13"
+  required_version = ">= 1.3.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -25,9 +25,20 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "www_bucket" {
+locals {
   bucket_prefix = "${var.prefix}-hashicafe-website-${lower(var.env)}-"
+}
+
+resource "aws_s3_bucket" "www_bucket" {
+  bucket_prefix = local.bucket_prefix
   force_destroy = true
+
+  lifecycle {
+    precondition {
+      condition     = length(local.bucket_prefix) <= 37
+      error_message = "The bucket_prefix ${local.bucket_prefix} is too long (max 37 characters). Reduce the size of `prefix` or `env`."
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "www_bucket" {
