@@ -5,6 +5,7 @@ variables {
   department = "PlatformEng"
 }
 
+
 provider "aws" {
   region = "us-east-2"
 }
