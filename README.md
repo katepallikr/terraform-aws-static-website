@@ -52,7 +52,7 @@ No modules.
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | This prefix will be included in the name of most resources. | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region where the resources are created. | `string` | n/a | yes |
 
-## Outputs
+## Output
 
 | Name | Description |
 |------|-------------|
