@@ -34,11 +34,14 @@ jobs:
       with:
         go-version: '1.17'
 
-    - name: Run TFLint
+    - name: Install and Run TFLint
       run: |
-        go get github.com/terraform-linters/tflint
-        tflint
-        
+        curl -sL https://github.com/terraform-linters/tflint/releases/latest/download/tflint_linux_amd64.zip -o tflint.zip
+        unzip tflint.zip
+        chmod +x tflint
+        ./tflint --version
+        ./tflint
+
     - name: Push to Dev Branch
       if: success()
       run: |
