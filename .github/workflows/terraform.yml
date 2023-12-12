@@ -45,10 +45,18 @@ jobs:
     - name: Push to Dev Branch
       if: success()
       run: |
-        git checkout dev
+        git fetch origin
+        git branch -r | grep "origin/dev" && exists=1 || exists=0
+        if [ $exists -eq 0 ]; then
+          echo "Dev branch does not exist, creating it..."
+          git checkout -b dev
+          git push --set-upstream origin dev
+        else
+          echo "Dev branch exists, checking out..."
+          git checkout dev
+        fi
         git merge test --no-edit  # Merging changes from test to dev
         git push origin dev
-
     # - name: Trigger TFC Webhook
     #   run: |
     #     curl -X POST -H "Content-Type: application/json" -d '{"payload": {"some": "data"}}' ${{ secrets.TFC_WEBHOOK_URL }}
