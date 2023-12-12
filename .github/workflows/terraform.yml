@@ -46,16 +46,8 @@ jobs:
       if: success()
       run: |
         git fetch origin
-        git branch -r | grep "origin/dev" && exists=1 || exists=0
-        if [ $exists -eq 0 ]; then
-          echo "Dev branch does not exist, creating it..."
-          git checkout -b dev
-          git push --set-upstream origin dev
-        else
-          echo "Dev branch exists, checking out..."
-          git checkout dev
-        fi
-        git merge test --no-edit  # Merging changes from test to dev
+        git checkout dev
+        git merge test --no-edit --allow-unrelated-histories
         git push origin dev
     # - name: Trigger TFC Webhook
     #   run: |
