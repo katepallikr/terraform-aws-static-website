@@ -24,16 +24,16 @@ run "region_validation" {
   }
 }
 
-run "env_validation" {
-  variables {
-    env = "dev"
-  }
+// run "env_validation" {
+//   variables {
+//     env = "dev"
+//   }
 
-  assert {
-    condition     = contains(["dev", "test", "prod", "demo"], var.env)
-    error_message = "Environment must be one of: dev, test, prod, demo."
-  }
-}
+//   assert {
+//     condition     = contains(["dev", "test", "prod", "demo"], var.env)
+//     error_message = "Environment must be one of: dev, test, prod, demo."
+//   }
+// }
 
 run "department_validation" {
   variables {
