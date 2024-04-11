@@ -11,7 +11,7 @@ For no-code provisioning, AWS credentials must be supplied to the workspace via 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
+| Name | Versions |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 5.17.0 |
